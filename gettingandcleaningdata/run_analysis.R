@@ -31,18 +31,18 @@ tidyData <- cbind(mergedSubject, mergedLabel, mergedData)
 aLen <- dim(activity)[1] 
 sLen <- length(table(mergedSubject))
 cLen <- dim(tidyData)[2]
-result <- matrix(NA, nrow=sLen*aLen, ncol=cLen) 
-result <- as.data.frame(result)
-colnames(result) <- colnames(tidyData)
+df <- matrix(NA, nrow=sLen*aLen, ncol=cLen) 
+df <- as.data.frame(df)
+colnames(df) <- colnames(tidyData)
 x <- 1
 for(i in 1:sLen) 
 {
 for(j in 1:aLen) 
 {
-    result[x, 1] <- sort(unique(mergedSubject)[, 1])[i]
-    result[x, 2] <- activity[j, 2]
-    result[x, 3:cLen] <- colMeans(tidyData[i == tidyData$subject&activity[j, 2] == tidyData$activity, 3:cLen])
-    x <- x + 1
+df[x, 1] <- sort(unique(mergedSubject)[, 1])[i]
+df[x, 2] <- activity[j, 2]
+df[x, 3:cLen] <- colMeans(tidyData[i == tidyData$subject&activity[j, 2] == tidyData$activity, 3:cLen])
+x <- x + 1
 }
 }
 print("second tidy set created")
